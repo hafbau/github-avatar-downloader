@@ -10,8 +10,15 @@ function getRepoContributors(repoOwner, repoName, cb) {
   let endpoint = `@api.github.com/repos/${repoOwner}/${repoName}/contributors`;
   let requestURL = `https://${GITHUB_USER}:${GITHUB_TOKEN}` + endpoint;
 
-  request.get(requestURL, function (err, response) {
-    cb(err, response);
+  let options = {
+                  url: requestURL,
+                  headers: {
+                              'User-Agent': 'GitHub Avatar Downloader - Student Project'
+                            }
+                };
+
+  request.get(options, function (err, response, body) {
+    cb(err, body);
   });
 }
 
