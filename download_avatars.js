@@ -45,5 +45,4 @@ getRepoContributors(owner, repo, function(err, result) {
     let path = 'avatars/' + contrib.login + '.jpg';
     downloadImageByURL(contrib.avatar_url, path);
   });
-  // console.log('Contributors avatars downloaded to ./avatars');
 });
