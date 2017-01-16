@@ -8,6 +8,7 @@ console.log('Welcome to the GitHub Avatar Downloader!');
 let [owner, repo] = (function() {
   if (process.argv.slice(2).length > 1 ) return process.argv.slice(2);
   console.log('Try again with owner and repo e.g "node download_avatar.js owner repo"');
+  process.exit(1);
 })();
 
 function getRepoContributors(repoOwner, repoName, cb) {
