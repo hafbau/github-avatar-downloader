@@ -1,4 +1,5 @@
 const request = require('request');
+const fs = require('fs');
 
 const GITHUB_USER = 'hafbau';
 const GITHUB_TOKEN = '065146933e39bb482d8cbb1c426d23e81432d3ae';
@@ -24,11 +25,19 @@ function getRepoContributors(repoOwner, repoName, cb) {
 }
 
 
-
+function downloadImageByURL(url, filePath) {
+  // ...
+  request.get(url)
+          .on('error', function (err) { throw err; })
+          .pipe(fs.createWriteStream(filePath))
+}
 
 // calling
 getRepoContributors("jquery", "jquery", function(err, result) {
   if(err) console.log("Errors:", err);
-  
-  result.forEach(contrib => console.log(contrib.avatar_url) )
+
+  result.forEach(contrib => {
+    let path = 'avatars/' + contrib.login + '.jpg';
+    downloadImageByURL(contrib.avatar_url, path);
+  });
 });
